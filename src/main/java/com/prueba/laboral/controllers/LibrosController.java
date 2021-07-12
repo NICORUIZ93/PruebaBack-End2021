@@ -38,6 +38,18 @@ public class LibrosController {
 
     }
 
+    @GetMapping("/libro/{id}")
+    public ResponseEntity<Object> getLibro(@PathVariable String id) {
+
+        try {
+
+            return new ResponseEntity<>(libroRepo.findById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+    }
+
     @PostMapping("/crear")
     public ResponseEntity<String> createLibro(@RequestBody LibroModel libro) {
 
@@ -63,7 +75,8 @@ public class LibrosController {
             _Model.setCategoria(libro.getCategoria());
             _Model.setCantidadDisponible(libro.getCantidadDisponible());
             _Model.setCantidadReservada(libro.getCantidadReservada());
-            return new ResponseEntity<>("Actualizado con exito " + libroRepo.save(_Model), HttpStatus.OK);
+            libroRepo.save(_Model);
+            return new ResponseEntity<>("Actualizado con exito " + libroOptional.get().getNombre(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

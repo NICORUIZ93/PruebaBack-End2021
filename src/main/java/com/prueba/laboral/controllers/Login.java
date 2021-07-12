@@ -1,15 +1,12 @@
 package com.prueba.laboral.controllers;
 
-import java.util.List;
-
 import com.prueba.laboral.models.UsersModel;
 import com.prueba.laboral.repositorios.UsersRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,14 +18,16 @@ public class Login {
     @Autowired
     public UsersRepo usersRepo;
 
-    @PostMapping("/user")
-    public ResponseEntity<List<UsersModel>> login() {
+    @GetMapping("/user")
+    public boolean getUser(@RequestBody UsersModel user) {
 
-        try {
+        UsersModel loginUse = usersRepo.findByNombre(user.getNombre());
+        if (loginUse.getContraseña().equals(user.getContraseña())) {
 
-            return new ResponseEntity<>(usersRepo.findAll(), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return true;
+
+        } else {
+            return false;
         }
 
     }

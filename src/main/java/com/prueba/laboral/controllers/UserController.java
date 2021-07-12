@@ -38,14 +38,23 @@ public class UserController {
 
     }
 
+    @GetMapping("/user/")
+    public UsersModel getUser(@RequestBody UsersModel user) {
+
+        UsersModel loginUse = usersRepo.findByNombre(user.getNombre());
+
+        return loginUse;
+
+    }
+
     @PostMapping("/crear")
     public ResponseEntity<String> createUser(@RequestBody UsersModel user) {
 
         try {
 
-            UsersModel UsuarioIn = usersRepo.insert(user);
+            usersRepo.insert(user);
 
-            return new ResponseEntity<>("Usuario creado " + UsuarioIn.getNombre(), HttpStatus.OK);
+            return new ResponseEntity<>("Usuario creado " + user.getNombre(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -61,7 +70,8 @@ public class UserController {
             _Model.setNombre(user.getNombre());
             _Model.setApellido(user.getApellido());
             _Model.setContraseña(user.getContraseña());
-            return new ResponseEntity<>("Actualizado con exito " + usersRepo.save(_Model), HttpStatus.OK);
+            usersRepo.save(_Model);
+            return new ResponseEntity<>("Actualizado con exito " + user.getNombre(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
