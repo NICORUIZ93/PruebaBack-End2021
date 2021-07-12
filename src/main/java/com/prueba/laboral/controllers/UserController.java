@@ -47,6 +47,15 @@ public class UserController {
 
     }
 
+    @GetMapping("/userid/{id}")
+    public Optional<UsersModel> getUserId(@PathVariable String id) {
+
+        Optional<UsersModel> loginUse = usersRepo.findById(id);
+
+        return loginUse;
+
+    }
+
     @PostMapping("/crear")
     public ResponseEntity<String> createUser(@RequestBody UsersModel user) {
 
