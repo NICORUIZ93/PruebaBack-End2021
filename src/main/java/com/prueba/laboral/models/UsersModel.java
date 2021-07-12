@@ -1,6 +1,6 @@
 package com.prueba.laboral.models;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,16 +14,16 @@ public class UsersModel {
     private String apellido;
     private String contraseña;
     private boolean role = false;
-    private ArrayList<String> reserva;
+    private List<Object> reservas;
 
     public UsersModel(String id, String nombre, String apellido, String contraseña, boolean role,
-            ArrayList<String> reserva) {
+            List<Object> reservas) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.contraseña = contraseña;
         this.role = role;
-        this.reserva = reserva;
+        this.reservas = reservas;
     }
 
     public String getId() {
@@ -66,13 +66,12 @@ public class UsersModel {
         this.role = role;
     }
 
-    public ArrayList<String> getReserva() {
-        return reserva;
+    public List<Object> getReservas() {
+        return reservas;
     }
 
-    public void setReserva(ArrayList<String> reserva) {
-        this.reserva = reserva;
-
+    public void setReservas(List<Object> reservas) {
+        this.reservas = reservas;
     }
 
 }

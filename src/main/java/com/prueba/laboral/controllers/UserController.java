@@ -55,7 +55,9 @@ public class UserController {
             usersRepo.insert(user);
 
             return new ResponseEntity<>("Usuario creado " + user.getNombre(), HttpStatus.OK);
-        } catch (Exception e) {
+        } catch (
+
+        Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -70,6 +72,7 @@ public class UserController {
             _Model.setNombre(user.getNombre());
             _Model.setApellido(user.getApellido());
             _Model.setContraseña(user.getContraseña());
+            _Model.setReservas(user.getReservas());
             usersRepo.save(_Model);
             return new ResponseEntity<>("Actualizado con exito " + user.getNombre(), HttpStatus.OK);
         } else {
