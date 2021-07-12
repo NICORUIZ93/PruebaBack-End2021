@@ -72,6 +72,7 @@ public class UsersModel {
 
     public void setReserva(ArrayList<String> reserva) {
         this.reserva = reserva;
+
     }
 
 }
