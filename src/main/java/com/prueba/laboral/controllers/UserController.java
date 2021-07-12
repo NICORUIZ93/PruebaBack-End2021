@@ -38,7 +38,7 @@ public class UserController {
 
     }
 
-    @GetMapping("/user/")
+    @PostMapping("/user")
     public UsersModel getUser(@RequestBody UsersModel user) {
 
         UsersModel loginUse = usersRepo.findByNombre(user.getNombre());

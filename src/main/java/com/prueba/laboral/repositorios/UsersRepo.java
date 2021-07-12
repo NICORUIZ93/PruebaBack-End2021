@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsersRepo extends MongoRepository<UsersModel, String> {
 
-public UsersModel findByNombre(String id);
+    public UsersModel findByNombre(String id);
 
 }
